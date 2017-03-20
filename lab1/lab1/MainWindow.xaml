@@ -17,46 +17,50 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" FontSize="26.667" FontWeight="Bold" >Оплата покупки</TextBlock>
+        <TextBlock Grid.Column="0" FontSize="26.667" FontWeight="Bold"  Margin="20,0,0,0">Оплата покупки</TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
 
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="6*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="6*" ></ColumnDefinition>
+                <ColumnDefinition Width="16*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" >Стоимость товара</TextBlock>
-            <TextBlock Grid.Column="1" FontWeight="Bold" FontSize="13.333">1020 руб</TextBlock>
+            <TextBlock Grid.Column="1" >Стоимость товара</TextBlock>
+            <TextBlock Grid.Column="2" FontWeight="Bold" FontSize="13.333">1020 руб</TextBlock>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="28*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="21*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="0"></RadioButton>
-            <TextBlock Grid.Column="1">Наличными при получении</TextBlock>
+            <RadioButton Grid.Column="1"></RadioButton>
+            <TextBlock Grid.Column="2">Наличными при получении</TextBlock>
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="14*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Margin="0,5,10,5">Сдача с...</TextBlock>
-            <ComboBox Grid.Column="1" Margin="0,5,10,5" >
+            <TextBlock Grid.Column="1" Margin="0,5,10,5">Сдача с...</TextBlock>
+            <ComboBox Grid.Column="2" Margin="0,5,10,5" >
                 <TextBlock>5000</TextBlock>
                 <TextBlock>1000</TextBlock>
                 <TextBlock>500</TextBlock>
             </ComboBox>
-            <TextBlock Grid.Column="2" Margin="0,5,0,0">руб.</TextBlock>
+            <TextBlock Grid.Column="3" Margin="0,5,0,0">руб.</TextBlock>
         </Grid>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="28*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="21*"></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="0"></RadioButton>
-            <TextBlock Grid.Column="1">Банковской картой</TextBlock>
+            <RadioButton Grid.Column="1"></RadioButton>
+            <TextBlock Grid.Column="2">Банковской картой</TextBlock>
         </Grid>
         <Grid Grid.Row="5">
             <Grid.RowDefinitions>
@@ -64,28 +68,30 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="7*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="18*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,5,10,5">Номер карты</TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,5,10,5">Держатель</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="0,4,0,4"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,4,0,4"></TextBox>
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,10,5">Номер карты</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,5,10,5">Держатель</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="2" Margin="0,4,0,4"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="2" Margin="0,4,0,4"></TextBox>
         </Grid>
         <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="1*" ></ColumnDefinition>
-                <ColumnDefinition Width="1*" ></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="1*" ></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="2*" ></ColumnDefinition>
+                <ColumnDefinition Width="2*" ></ColumnDefinition>
+                <ColumnDefinition Width="7*"></ColumnDefinition>
+                <ColumnDefinition Width="2*" ></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
                 <ColumnDefinition Width="1*" ></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Margin="0,5,10,5">Действует до</TextBlock>
-            <ComboBox Grid.Column="1" IsEditable="True" IsReadOnly="True" Text="мм" Margin="0,4,5,4" >
+            <TextBlock Grid.Column="1" Margin="0,5,10,5">Действует до</TextBlock>
+            <ComboBox Grid.Column="2" IsEditable="True" IsReadOnly="True" Text="мм" Margin="0,4,2,4" >
                 <TextBlock>01</TextBlock>
                 <TextBlock>02</TextBlock>
                 <TextBlock>03</TextBlock>
@@ -99,7 +105,7 @@
                 <TextBlock>11</TextBlock>
                 <TextBlock>12</TextBlock>
             </ComboBox>
-            <ComboBox Grid.Column="2" IsEditable="True" IsReadOnly="True" Text="гг"  Margin="5,4,0,4">
+            <ComboBox Grid.Column="3" IsEditable="True" IsReadOnly="True" Text="гг"  Margin="5,4,0,4">
                 <TextBlock>17</TextBlock>
                 <TextBlock>18</TextBlock>
                 <TextBlock>19</TextBlock>
@@ -114,22 +120,22 @@
                 <TextBlock>28</TextBlock>
                 <TextBlock>29</TextBlock>
             </ComboBox>
-            <TextBlock Grid.Column="4" Margin="15,5,0,5">CVV</TextBlock>
-            <TextBox Grid.Column="5" Margin="0,5,0,5" ></TextBox>
+            <TextBlock Grid.Column="5" Margin="15,5,0,5">CVV</TextBlock>
+            <TextBox Grid.Column="6" Margin="0,5,0,5" ></TextBox>
         </Grid>
         <Grid Grid.Row="7">
             <Grid.ColumnDefinitions>
-
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Margin="0,20,0,10" >Оплатить</Button>
-            <Button Grid.Column="2" Margin="0,20,0,10" >Вернуться</Button>
-            <Button Grid.Column="4" Margin="0,20,0,10" >Отмена</Button>
+            <Button Grid.Column="1" Margin="0,20,0,10" >Оплатить</Button>
+            <Button Grid.Column="3" Margin="0,20,0,10" >Вернуться</Button>
+            <Button Grid.Column="5" Margin="0,20,0,10" >Отмена</Button>
         </Grid>
     </Grid>
 </Window>
