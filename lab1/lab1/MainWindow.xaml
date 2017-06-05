@@ -6,6 +6,12 @@
         xmlns:local="clr-namespace:lab1"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <local:NotEmptyValidationRule x:Key="NotEmptyRule"></local:NotEmptyValidationRule>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:ViewModel></local:ViewModel>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
@@ -26,7 +32,7 @@
                 <ColumnDefinition Width="16*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" >Стоимость товара</TextBlock>
-            <TextBlock Grid.Column="2" FontWeight="Bold" FontSize="13.333">1020 руб</TextBlock>
+            <TextBlock Grid.Column="2" FontWeight="Bold" FontSize="13.333" Text="{Binding price}"></TextBlock>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -34,7 +40,7 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="21*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="1"></RadioButton>
+            <RadioButton Grid.Column="1"  IsChecked="{Binding cash, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></RadioButton>
             <TextBlock Grid.Column="2">Наличными при получении</TextBlock>
         </Grid>
         <Grid Grid.Row="3">
@@ -44,13 +50,11 @@
                 <ColumnDefinition Width="4*"></ColumnDefinition>
                 <ColumnDefinition Width="14*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1" Margin="0,5,10,5">Сдача с...</TextBlock>
-            <ComboBox Grid.Column="2" Margin="0,5,10,5" >
-                <TextBlock>5000</TextBlock>
-                <TextBlock>1000</TextBlock>
-                <TextBlock>500</TextBlock>
+            <TextBlock Grid.Column="1" Margin="0,5,10,5" Visibility="{Binding cashVisibility}">Сдача с...</TextBlock>
+            <ComboBox Grid.Column="2"  Margin="0,5,10,5" Visibility="{Binding cashVisibility}" ItemsSource="{Binding change}" SelectedItem="{Binding selectedChange}" >
+                
             </ComboBox>
-            <TextBlock Grid.Column="3" Margin="0,5,0,0">руб.</TextBlock>
+            <TextBlock Visibility="{Binding cashVisibility}" Grid.Column="3" Margin="0,5,0,0">руб.</TextBlock>
         </Grid>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
@@ -59,8 +63,8 @@
                 <ColumnDefinition Width="21*"></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="1"></RadioButton>
-            <TextBlock Grid.Column="2">Банковской картой</TextBlock>
+            <RadioButton Grid.Column="1"   IsChecked="{Binding card, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
+            <TextBlock Grid.Column="2" >Банковской картой</TextBlock>
         </Grid>
         <Grid Grid.Row="5">
             <Grid.RowDefinitions>
@@ -73,10 +77,22 @@
                 <ColumnDefinition Width="18*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,10,5">Номер карты</TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,5,10,5">Держатель</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="2" Margin="0,4,0,4"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="2" Margin="0,4,0,4"></TextBox>
+            <TextBlock Visibility="{Binding cardVisibility}" Grid.Row="0" Grid.Column="1" Margin="0,5,10,5">Номер карты</TextBlock>
+            <TextBlock Visibility="{Binding cardVisibility}" Grid.Row="1" Grid.Column="1" Margin="0,5,10,5">Держатель</TextBlock>
+            <TextBox Visibility="{Binding cardVisibility}" Grid.Row="0" Grid.Column="2" Margin="0,4,0,4" >
+                <Binding Path="numberOfCard">
+                    <Binding.ValidationRules>
+                        <local:NumValidationRule minNum="1000000000000000" maxNum="9999999999999999"></local:NumValidationRule>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <TextBox Visibility="{Binding cardVisibility}" Grid.Row="1" Grid.Column="2" Margin="0,4,0,4" >
+                <Binding Path="cardHolder">
+                    <Binding.ValidationRules>
+                        <local:NotEmptyValidationRule></local:NotEmptyValidationRule>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
         </Grid>
         <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
@@ -90,38 +106,21 @@
                 <ColumnDefinition Width="1*" ></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1" Margin="0,5,10,5">Действует до</TextBlock>
-            <ComboBox Grid.Column="2" IsEditable="True" IsReadOnly="True" Text="мм" Margin="0,4,2,4" >
-                <TextBlock>01</TextBlock>
-                <TextBlock>02</TextBlock>
-                <TextBlock>03</TextBlock>
-                <TextBlock>04</TextBlock>
-                <TextBlock>05</TextBlock>
-                <TextBlock>06</TextBlock>
-                <TextBlock>07</TextBlock>
-                <TextBlock>08</TextBlock>
-                <TextBlock>09</TextBlock>
-                <TextBlock>10</TextBlock>
-                <TextBlock>11</TextBlock>
-                <TextBlock>12</TextBlock>
+            <TextBlock Visibility="{Binding cardVisibility}" Grid.Column="1" Margin="0,5,10,5">Действует до</TextBlock>
+            <ComboBox Visibility="{Binding cardVisibility}" Grid.Column="2" SelectedItem="{Binding selectedValidThroughMonth}" ItemsSource="{Binding validThroughMonth}" IsEditable="True" IsReadOnly="True" Text="мм" Margin="0,4,2,4" >
+                
             </ComboBox>
-            <ComboBox Grid.Column="3" IsEditable="True" IsReadOnly="True" Text="гг"  Margin="5,4,0,4">
-                <TextBlock>17</TextBlock>
-                <TextBlock>18</TextBlock>
-                <TextBlock>19</TextBlock>
-                <TextBlock>20</TextBlock>
-                <TextBlock>21</TextBlock>
-                <TextBlock>22</TextBlock>
-                <TextBlock>23</TextBlock>
-                <TextBlock>24</TextBlock>
-                <TextBlock>25</TextBlock>
-                <TextBlock>26</TextBlock>
-                <TextBlock>27</TextBlock>
-                <TextBlock>28</TextBlock>
-                <TextBlock>29</TextBlock>
+            <ComboBox Visibility="{Binding cardVisibility}" Grid.Column="3" SelectedItem="{Binding selectedValidThroughYear}" ItemsSource="{Binding validThroughYear}" IsEditable="True" IsReadOnly="True" Text="гг"  Margin="5,4,0,4">
+                
             </ComboBox>
-            <TextBlock Grid.Column="5" Margin="15,5,0,5">CVV</TextBlock>
-            <TextBox Grid.Column="6" Margin="0,5,0,5" ></TextBox>
+            <TextBlock Visibility="{Binding cardVisibility}" Grid.Column="5" Margin="15,5,0,5">CVV</TextBlock>
+            <TextBox Visibility="{Binding cardVisibility}" Grid.Column="6" Margin="0,5,0,5" >
+                <Binding Path="CVV">
+                    <Binding.ValidationRules>
+                        <local:NumValidationRule maxNum="999" minNum="99"></local:NumValidationRule>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
         </Grid>
         <Grid Grid.Row="7">
             <Grid.ColumnDefinitions>
@@ -133,9 +132,14 @@
                 <ColumnDefinition Width="5*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Margin="0,20,0,10" >Оплатить</Button>
+            <Button Command="{Binding Save}" CommandParameter="{Binding}" Grid.Column="1" Margin="0,20,0,10" >Оплатить</Button>
             <Button Grid.Column="3" Margin="0,20,0,10" >Вернуться</Button>
             <Button Grid.Column="5" Margin="0,20,0,10" >Отмена</Button>
         </Grid>
+        
     </Grid>
+    
+    
+    
+    
 </Window>
