@@ -73,7 +73,7 @@ namespace lab1
             numberOfCard = 1000000000000000;
 
             Save = new Save();
-            cardVisibility = Visibility.Hidden;
+            //cardVisibility = Visibility.Hidden;
             change = new List<int>()
             {
                 100,

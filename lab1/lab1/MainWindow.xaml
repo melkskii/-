@@ -6,13 +6,17 @@
         xmlns:local="clr-namespace:lab1"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Window.Resources>
-        <local:NotEmptyValidationRule x:Key="NotEmptyRule"></local:NotEmptyValidationRule>
-    </Window.Resources>
     <Window.DataContext>
         <local:ViewModel></local:ViewModel>
     </Window.DataContext>
-    <Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resource.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="{StaticResource BackBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -23,7 +27,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" FontSize="26.667" FontWeight="Bold"  Margin="20,0,0,0">Оплата покупки</TextBlock>
+        <TextBlock Grid.Column="0" Style="{StaticResource TextBlockHeadStyle}"  Margin="20,0,0,0">Оплата покупки</TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
 
@@ -31,7 +35,7 @@
                 <ColumnDefinition Width="6*" ></ColumnDefinition>
                 <ColumnDefinition Width="16*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1" >Стоимость товара</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}"  Grid.Column="1"  >Стоимость товара</TextBlock>
             <TextBlock Grid.Column="2" FontWeight="Bold" FontSize="13.333" Text="{Binding price}"></TextBlock>
         </Grid>
         <Grid Grid.Row="2">
@@ -40,8 +44,8 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="21*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="1"  IsChecked="{Binding cash, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></RadioButton>
-            <TextBlock Grid.Column="2">Наличными при получении</TextBlock>
+            <RadioButton  Grid.Column="1"  IsChecked="{Binding cash, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></RadioButton>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Grid.Column="2">Наличными при получении</TextBlock>
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
@@ -50,11 +54,11 @@
                 <ColumnDefinition Width="4*"></ColumnDefinition>
                 <ColumnDefinition Width="14*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1" Margin="0,5,10,5" Visibility="{Binding cashVisibility}">Сдача с...</TextBlock>
-            <ComboBox Grid.Column="2"  Margin="0,5,10,5" Visibility="{Binding cashVisibility}" ItemsSource="{Binding change}" SelectedItem="{Binding selectedChange}" >
-                
+            <TextBlock Style="{StaticResource TextBlockStyle}" Grid.Column="1" Margin="0,5,10,5" Visibility="{Binding cashVisibility}">Сдача с...</TextBlock>
+            <ComboBox  Grid.Column="2"  Margin="0,5,10,5" Visibility="{Binding cashVisibility}" ItemsSource="{Binding change}" SelectedItem="{Binding selectedChange}" >
+
             </ComboBox>
-            <TextBlock Visibility="{Binding cashVisibility}" Grid.Column="3" Margin="0,5,0,0">руб.</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Visibility="{Binding cashVisibility}" Grid.Column="3" Margin="0,5,0,0">руб.</TextBlock>
         </Grid>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
@@ -64,7 +68,7 @@
 
             </Grid.ColumnDefinitions>
             <RadioButton Grid.Column="1"   IsChecked="{Binding card, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
-            <TextBlock Grid.Column="2" >Банковской картой</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Grid.Column="2" >Банковской картой</TextBlock>
         </Grid>
         <Grid Grid.Row="5">
             <Grid.RowDefinitions>
@@ -77,16 +81,16 @@
                 <ColumnDefinition Width="18*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Visibility="{Binding cardVisibility}" Grid.Row="0" Grid.Column="1" Margin="0,5,10,5">Номер карты</TextBlock>
-            <TextBlock Visibility="{Binding cardVisibility}" Grid.Row="1" Grid.Column="1" Margin="0,5,10,5">Держатель</TextBlock>
-            <TextBox Visibility="{Binding cardVisibility}" Grid.Row="0" Grid.Column="2" Margin="0,4,0,4" >
+            <TextBlock Style="{StaticResource TextBlockStyle}" Visibility="{Binding cardVisibility}" Grid.Row="0" Margin="16,5,10,5" Grid.ColumnSpan="2">Номер карты</TextBlock>
+            <TextBlock  Style="{StaticResource TextBlockStyle}" Visibility="{Binding cardVisibility}" Grid.Row="1" Grid.Column="1" Margin="0,5,10,5">Держатель</TextBlock>
+            <TextBox Style="{StaticResource TextBoxStyle}" Visibility="{Binding cardVisibility}" Grid.Row="0" Grid.Column="2" Margin="0,4,0,4" >
                 <Binding Path="numberOfCard">
                     <Binding.ValidationRules>
                         <local:NumValidationRule minNum="1000000000000000" maxNum="9999999999999999"></local:NumValidationRule>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <TextBox Visibility="{Binding cardVisibility}" Grid.Row="1" Grid.Column="2" Margin="0,4,0,4" >
+            <TextBox Style="{StaticResource TextBoxStyle}" Visibility="{Binding cardVisibility}" Grid.Row="1" Grid.Column="2" Margin="0,4,0,4" >
                 <Binding Path="cardHolder">
                     <Binding.ValidationRules>
                         <local:NotEmptyValidationRule></local:NotEmptyValidationRule>
@@ -106,15 +110,15 @@
                 <ColumnDefinition Width="1*" ></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
-            <TextBlock Visibility="{Binding cardVisibility}" Grid.Column="1" Margin="0,5,10,5">Действует до</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Visibility="{Binding cardVisibility}" Grid.Column="1" Margin="0,5,10,5">Действует до</TextBlock>
             <ComboBox Visibility="{Binding cardVisibility}" Grid.Column="2" SelectedItem="{Binding selectedValidThroughMonth}" ItemsSource="{Binding validThroughMonth}" IsEditable="True" IsReadOnly="True" Text="мм" Margin="0,4,2,4" >
-                
+
             </ComboBox>
             <ComboBox Visibility="{Binding cardVisibility}" Grid.Column="3" SelectedItem="{Binding selectedValidThroughYear}" ItemsSource="{Binding validThroughYear}" IsEditable="True" IsReadOnly="True" Text="гг"  Margin="5,4,0,4">
-                
+
             </ComboBox>
-            <TextBlock Visibility="{Binding cardVisibility}" Grid.Column="5" Margin="15,5,0,5">CVV</TextBlock>
-            <TextBox Visibility="{Binding cardVisibility}" Grid.Column="6" Margin="0,5,0,5" >
+            <TextBlock FontWeight="Bold" Style="{StaticResource TextBlockStyle}" Visibility="{Binding cardVisibility}" Grid.Column="5" Margin="0,5,10,5">CVV</TextBlock>
+            <TextBox Style="{StaticResource TextBoxStyle}" Visibility="{Binding cardVisibility}" Grid.Column="6" Margin="0,5,0,5" >
                 <Binding Path="CVV">
                     <Binding.ValidationRules>
                         <local:NumValidationRule maxNum="999" minNum="99"></local:NumValidationRule>
@@ -132,14 +136,14 @@
                 <ColumnDefinition Width="5*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Command="{Binding Save}" CommandParameter="{Binding}" Grid.Column="1" Margin="0,20,0,10" >Оплатить</Button>
-            <Button Grid.Column="3" Margin="0,20,0,10" >Вернуться</Button>
-            <Button Grid.Column="5" Margin="0,20,0,10" >Отмена</Button>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding Save}" CommandParameter="{Binding}" Grid.Column="1" Margin="0,20,0,10" >Оплатить</Button>
+            <Button Style="{StaticResource ButtonStyle}" Grid.Column="3" Margin="0,20,0,10" >Вернуться</Button>
+            <Button Style="{StaticResource ButtonStyle}" Grid.Column="5" Margin="0,20,0,10" >Отмена</Button>
         </Grid>
-        
+
     </Grid>
-    
-    
-    
-    
+
+
+
+
 </Window>
